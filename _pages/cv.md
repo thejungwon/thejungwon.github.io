@@ -11,9 +11,9 @@ redirect_from:
 
 # Education
 
-- Ph.D in Applied Data Science, University of Stavanger, 2026 (expected)
-- M.S. in Computer Science, University of Stavanger, 2019
-- B.S. in Computer Science, Yonsei University, 2017
+- Ph.D in Applied Data Science, University of Stavanger, 2022-2026
+- M.S. in Computer Science, University of Stavanger, 2017-2019
+- B.S. in Computer Science, Yonsei University, 2009-2017
 
 # Work experience
 
@@ -76,6 +76,6 @@ Teaching
   
 Others
 ======
-- Mar 2020 — Jan 2022: Information Operations Soldier (compulsory service)
+- Mar 2010 — Jan 2012: Information Operations Soldier (compulsory service)
   - Republic of Korea Army Special Warfare Command — Special Warfare School
   - Completed airborne training; conducted 10 parachute jumps 🪂🪂🪂.
