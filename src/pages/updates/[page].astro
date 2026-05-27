@@ -1,0 +1,15 @@
+---
+import { getCollection } from 'astro:content';
+import { template } from '@/settings';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const totalPages = Math.max(1, Math.ceil(posts.length / template.postPerPage));
+  return Array.from({ length: totalPages }, (_, i) => ({
+    params: { page: String(i + 1) },
+  }));
+}
+
+const { page } = Astro.params;
+return Astro.redirect(`/news/${page}`);
+---

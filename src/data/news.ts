@@ -1,0 +1,51 @@
+export const news = [
+  {
+    date: '2026-04',
+    type: 'Publication',
+    title: 'Phase-Synchronization-Based Federated Learning for Edge Computing Over Decentralized Networks',
+    detail: 'Published in IEEE Transactions on Vehicular Technology.',
+    link: 'https://doi.org/10.1109/TVT.2026.3684498',
+  },
+  {
+    date: '2026-01',
+    type: 'Publication',
+    title: 'GC-Fed: Gradient Centralized Federated Learning with Partial Client Participation',
+    detail: 'Published in Information Fusion.',
+    link: 'https://doi.org/10.1016/j.inffus.2026.104148',
+  },
+  {
+    date: '2025-12',
+    type: 'Publication',
+    title: 'FedShift: Robust Federated Learning Aggregation Scheme in Resource Constrained Environment via Weight Shifting',
+    detail: 'Published in IEEE Access.',
+    link: 'https://doi.org/10.1109/ACCESS.2025.3648064',
+  },
+  {
+    date: '2022-11',
+    type: 'Career',
+    title: 'Completed Lecturer role at Yonsei University',
+    detail: 'Graduate School of Information (Machine Learning, Big Data, AI).',
+    link: '',
+  },
+  {
+    date: '2022-10',
+    type: 'Career',
+    title: 'Completed Tech Lead role at Flipper Corporation',
+    detail: 'Led product development for no-code native app platform.',
+    link: '',
+  },
+  {
+    date: '2022-12',
+    type: 'Education',
+    title: 'Started Ph.D. in Applied Data Science',
+    detail: 'University of Stavanger.',
+    link: '',
+  },
+  {
+    date: '2019-06',
+    type: 'Education',
+    title: "Completed M.S. in Computer Science",
+    detail: 'Thesis: Minimum Word Error Rate Training for Speech Separation.',
+    link: '/news/masters-thesis',
+  },
+];

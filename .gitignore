@@ -1,21 +1,24 @@
-# Ignore the contents of the _site directory and other cache directories
-_site/
-.sass-cache/
+# build output
+dist/
 
-# Ignore the directory for local files during development
-local/
+# generated types
+.astro/
 
-# Ignore the Gemfile that is generated
-Gemfile.lock
+# dependencies
+node_modules/
 
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Ignore files created by npm
-node_modules
-package-lock.json
+# environment variables
+.env
+.env.production
 
-# Ignore the vendor file at root level and bundle for alternative installation
-/vendor/
-.bundle/
+# macOS-specific files
+.DS_Store
 
-# Ignore folders related to IDEs
-.vscode/
+# jetbrains setting folder
+.idea/

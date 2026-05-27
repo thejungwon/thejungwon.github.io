@@ -1,0 +1,33 @@
+---
+import { template } from "@/settings"
+const { page } = Astro.props
+const totalPages = page.lastPage ?? 1
+const currentPage = page.currentPage ?? 1
+const currentPath = page.url.current ?? `${template.base}/news/${currentPage}`
+const pathWithoutTrailingSlash = currentPath.replace(/\/$/, '')
+const numberPathPrefix = pathWithoutTrailingSlash.replace(/\/\d+$/, '')
+---
+<div class="join flex justify-center mt-8">
+  {/* Previous button */}
+  <a
+    href={page.url.prev}
+    class:list={["join-item btn btn-sm", { "btn-disabled": !page.url.prev }]}
+  >«</a>
+
+  {
+    Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+      <a
+        href={`${numberPathPrefix}/${pageNumber}`}
+        class:list={["join-item btn btn-sm", { "btn-active": pageNumber === currentPage }]}
+      >
+        {pageNumber}
+      </a>
+    ))
+  }
+
+  {/* Next button */}
+  <a
+    href={page.url.next}
+    class:list={["join-item btn btn-sm", { "btn-disabled": !page.url.next }]}
+  >»</a>
+</div>

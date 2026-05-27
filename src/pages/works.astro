@@ -1,0 +1,45 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import { experiences } from '@/data/cv';
+
+const orderedExperiences = [...experiences].sort((a, b) => {
+  const getEndYear = (time: string) => {
+    const end = time.split(' - ')[1] ?? '';
+    const normalized = end.toLowerCase().trim();
+    if (['present', 'now', 'current', 'today'].includes(normalized)) {
+      return Number.MAX_SAFE_INTEGER;
+    }
+    const match = end.match(/\d{4}/);
+    return match ? Number(match[0]) : 0;
+  };
+  return getEndYear(b.time) - getEndYear(a.time);
+});
+---
+
+<Layout title='Works'>
+  <div class='prose max-w-none'>
+    <h1 class='text-3xl font-bold mb-8'>Works</h1>
+    <p class='text-lg mb-8'>
+      Summary of industry and professional roles, including what I built, led, and delivered.
+    </p>
+  </div>
+
+  <section class='grid gap-5'>
+    <ul class='space-y-0 contents'>
+      {orderedExperiences.map((item) => (
+        <li class='p-6 bg-base-200 rounded-xl text-base-content'>
+          <h2 class='text-xl font-bold'>{item.title}</h2>
+          <p class='font-semibold mt-1'>{item.company}</p>
+          <p class='opacity-80'>{item.time} · {item.location}</p>
+          <ul class='list-disc pl-6 mt-3 space-y-1'>
+            {item.description
+              ?.split(';')
+              .map((line) => line.trim())
+              .filter(Boolean)
+              .map((line) => <li set:html={line}></li>)}
+          </ul>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

@@ -1,0 +1,138 @@
+---
+import Pagination from '@/components/ui/Pagination.astro'
+import Layout from '@/layouts/Layout.astro'
+import { trimExcerpt } from '@/lib/utils'
+import { template } from '@/settings'
+import { getCollection } from 'astro:content'
+
+const CATEGORIES = ['publication', 'talk', 'career'] as const
+const CATEGORY_LABEL: Record<(typeof CATEGORIES)[number], string> = {
+	publication: 'Publication',
+	talk: 'Talk',
+	career: 'Career',
+}
+
+type PostItem = {
+    title: string
+    date: string
+    category: 'publication' | 'talk' | 'career'
+    excerpt: string
+    slug: string
+}
+
+export async function getStaticPaths({ paginate }): Promise<Astro.getStaticPathsResult> {
+    const categories = ['publication', 'talk', 'career'] as const
+    const blogEntries = await getCollection('blog');
+
+    const posts: PostItem[] = blogEntries
+        .map((post) => ({
+            ...(() => {
+                const tags = post.data.tags ?? []
+                const lowerTitle = post.data.title.toLowerCase()
+                const normalizedTags = tags.map((value) =>
+                    value.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+                )
+                let category: 'publication' | 'talk' | 'career' = 'publication'
+                if (
+                    normalizedTags.includes('career') ||
+                    lowerTitle.includes('thesis submission') ||
+                    (lowerTitle.includes('phd') && lowerTitle.includes('submitted')) ||
+                    lowerTitle.includes('officially submitted')
+                ) {
+                    category = 'career'
+                } else if (
+                    normalizedTags.some((tag) =>
+                        ['talk', 'webinar', 'demo', 'workshop', 'poster', 'presentation'].includes(tag)
+                    )
+                ) {
+                    category = 'talk'
+                }
+                return { category }
+            })(),
+            title: post.data.title,
+            date: post.data.date,
+            excerpt: trimExcerpt(post.data.excerpt),
+            slug: `${template.base}/news/${post.id}`,
+        }))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+    return categories.flatMap((tagSlug) =>
+        paginate(
+            posts.filter((post) => post.category === tagSlug),
+            {
+                pageSize: template.postPerPage,
+                params: { tag: tagSlug },
+                props: { tagSlug },
+            }
+        )
+    );
+}
+
+const { page, tagSlug } = Astro.props
+---
+
+<Layout title={`News - ${CATEGORY_LABEL[tagSlug] ?? tagSlug}`}>
+    <div>
+		<h1 class='text-3xl font-bold mb-8'>
+			News
+			<span class='text-base-content/70 text-xl ml-2'>#{CATEGORY_LABEL[tagSlug] ?? tagSlug}</span>
+		</h1>
+		<div class='flex flex-wrap gap-2 mb-6'>
+			<a href={`${template.base}/news/1`} class='badge badge-outline p-4'>All</a>
+			{CATEGORIES.map((category) => (
+				<a
+					href={`${template.base}/news/tag/${category}/1`}
+					class:list={[
+						'badge badge-outline p-4 hover:opacity-80',
+						{ 'badge-accent': tagSlug === category },
+					]}
+				>
+					{CATEGORY_LABEL[category]}
+				</a>
+			))}
+		</div>
+		<div class='grid gap-8'>
+			{
+				page.data.map(post => (
+					<article class='card bg-base-200 transition-all'>
+						<div class='card-body'>
+							<div class='flex justify-between items-start'>
+								<h2 class='card-title text-xl'>
+                            <a href={post.slug} class='hover:text-accent'>
+										{post.title}
+									</a>
+								</h2>
+								<a
+									href={`${template.base}/news/tag/${post.category}/1`}
+									class='badge badge-accent badge-outline p-4 hover:opacity-80'
+								>
+									{CATEGORY_LABEL[post.category]}
+								</a>
+							</div>
+							<time datetime={post.date} class='text-sm text-base-content/71'>
+								{new Date(post.date).toLocaleDateString('en-US', {
+									year: 'numeric',
+									month: 'long',
+									day: 'numeric',
+								})}
+							</time>
+							<p class='mt-4'>{post.excerpt}</p>
+							<div class='card-actions justify-end'>
+								<a
+                            href={post.slug}
+									class='btn btn-sm btn-secondary text-secondary-content'
+								>
+									Read More
+								</a>
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+
+		<div class='flex justify-center mt-8'>
+			<Pagination page={page} />
+		</div>
+    </div>
+</Layout>

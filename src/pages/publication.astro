@@ -1,0 +1,123 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { publications } from "@/data/cv";
+import { highlightAuthor } from "@/lib/utils";
+
+const ALL_PAPERS = [...publications].sort((a, b) => Number(b.time) - Number(a.time));
+const conferenceKeywords = [
+  'conference',
+  'workshop',
+  'symposium',
+  'congress',
+  'ecml',
+  'pkdd',
+  'cloudcom',
+  'eage',
+  'norsk ikt-konferanse',
+];
+const getPublicationType = (venue: string) => {
+  const lower = venue.toLowerCase();
+  if (lower.includes('book chapter') || lower.includes('chapter')) return 'Book Chapter';
+  return conferenceKeywords.some((k) => lower.includes(k)) ? 'Conference' : 'Journal';
+};
+---
+
+<Layout title="Publication">
+  <div class="prose max-w-none">
+    <h1 class="text-3xl font-bold mb-8">Publication</h1>
+
+    <div class="space-y-8">
+      {
+        ALL_PAPERS.map((paper) => (
+          <div class="card bg-base-200">
+            <div class="card-body md:flex-row md:items-start md:gap-6">
+              <div class="flex-1">
+              <h2 class="card-title text-xl">
+                <a href={paper.link} class="hover:text-accent">
+                  {paper.title}
+                </a>
+              </h2>
+              <p class="text-base mb-2">
+                <span class="font-medium">Authors:</span>{" "}
+                <span set:html={highlightAuthor(paper.authors)} />
+              </p>
+              <p class="text-sm mb-3">
+                <span class="italic">{paper.journal}</span> • {paper.time}
+              </p>
+              <p class="mb-3">
+                <span class="badge badge-outline">{getPublicationType(paper.journal)}</span>
+              </p>
+              <p class="text-sm text-base-content/80">{paper.abstract}</p>
+              <div class="card-actions justify-end mt-4">
+                <a href={paper.link} class="btn btn-sm btn-secondary text-secondary-content">
+                  Read Paper
+                </a>
+              </div>
+              </div>
+              {paper.title.includes('GC-Fed') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/gc-fed-workflow.png"
+                    alt="GC-Fed workflow thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {paper.title.includes('FedShift') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/fedshift-system-architecture.png"
+                    alt="FedShift system architecture thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {paper.title.includes('IID to Non-IID') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/iid-noniid-landscape.png"
+                    alt="IID to Non-IID loss landscape thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {paper.title.includes('Flexible and secure code deployment') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/cloudcom-llm-secure-deployment.png"
+                    alt="CloudCom secure FL deployment workflow thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {paper.title.includes('ProxyLLM') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/proxyllm-architecture.png"
+                    alt="ProxyLLM architecture thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              {paper.title.includes('Federated AI Chat System') && (
+                <div class="md:w-56 shrink-0">
+                  <img
+                    src="/images/news/federated-ai-chat-system-overview.png"
+                    alt="Federated AI Chat System overview thumbnail"
+                    class="w-full h-auto rounded-lg border border-base-300"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
