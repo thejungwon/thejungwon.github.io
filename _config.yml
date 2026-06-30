@@ -184,6 +184,9 @@ exclude:
   - log
   - node_modules
   - package.json*
+  - src
+  - astro.config.mjs
+  - tsconfig.json
   - Rakefile
   - README
   - tmp
