@@ -156,7 +156,7 @@ export const publications = [
 		authors: 'A. Rafiei, Jungwon Seo, B. Yurdem, Ferhat Ozgur Catak',
 		journal: '2026 1st International Conference on Human Centric Artificial Intelligence (ICHCAI)',
 		time: '2026',
-		link: '',
+		link: 'https://ieeexplore.ieee.org/abstract/document/11607654',
 		abstract: '',
 	},
 	{
