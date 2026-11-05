@@ -88,10 +88,10 @@ export const experiences = [
 export const education = [
 	{
 		school: 'University of Stavanger',
-		time: 'Dec 2022 - Feb 2026',
-		degree: 'Ph.D in Applied Data Science',
+		time: 'Dec 2022 - Aug 2026',
+		degree: 'Ph.D. in Applied Data Science',
 		location: 'Stavanger, Norway',
-		description: `Ph.D. thesis (submitted): Toward Federated AI: Integrating Reliable Training, Automated Deployment, and Secure Inference.`,
+		description: `Ph.D. thesis: <a href="/news/phd-defense-and-degree" class="underline">Toward Federated AI: Integrating Reliable Training, Automated Deployment, and Secure Inference</a>. Disputation on 27 Aug 2026; degree conferred on 9 Sep 2026. Trial lecture: <em>Consensus and Coordination in Distributed Agentic AI</em>.`,
 	},
 	{
 		school: 'University of Stavanger',
@@ -138,11 +138,27 @@ export const languages = [
 	},
 	{
 		title: 'Norwegian',
-		description: 'Elementa proficiency',
+		description: 'Elementary proficiency',
 	},
 ];
 
 export const publications = [
+	{
+		title: 'Federated Inference: Toward Privacy-Preserving Collaborative and Incentivized Model Serving',
+		authors: 'Jungwon Seo, Ferhat Ozgur Catak, Chunming Rong, J. Jang',
+		journal: 'arXiv preprint arXiv:2603.02214',
+		time: '2026',
+		link: 'https://arxiv.org/abs/2603.02214',
+		abstract: '',
+	},
+	{
+		title: 'Temperature-Driven Uncertainty Assessment in LLM Medical Reasoning Using Geometric Embedding Analysis',
+		authors: 'A. Rafiei, Jungwon Seo, B. Yurdem, Ferhat Ozgur Catak',
+		journal: '2026 1st International Conference on Human Centric Artificial Intelligence (ICHCAI)',
+		time: '2026',
+		link: '',
+		abstract: '',
+	},
 	{
 		title: 'Phase-Synchronization-Based Federated Learning for Edge Computing Over Decentralized Networks',
 		authors: 'Minhoe Kim, Jungwon Seo, Woong-Hee Lee',
@@ -163,7 +179,7 @@ export const publications = [
 		title: 'FedShift: Robust Federated Learning Aggregation Scheme in Resource Constrained Environment via Weight Shifting',
 		authors: 'Jungwon Seo, Chunming Rong, Minhoe Kim',
 		journal: 'IEEE Access',
-		time: '2025',
+		time: '2026',
 		link: 'https://doi.org/10.1109/ACCESS.2025.3648064',
 		abstract: '',
 	},
@@ -208,9 +224,9 @@ export const publications = [
 		abstract: '',
 	},
 	{
-		title: 'Trustworthy AI for Safety-Critical Systems: Toward Robustness, Adversarial Resilience, and Uncertainty-Aware Intelligence',
+		title: 'Trustworthy AI in Safety-Critical Systems: Toward Robustness, Adversarial Resilience, and Uncertainty-Aware Intelligence',
 		authors: 'Ferhat Ozgur Catak, Jungwon Seo',
-		journal: 'Book Chapter (CRC Press)',
+		journal: 'Artificial Intelligence in Context of Digital Sovereignty (Book Chapter, CRC Press)',
 		time: '2026',
 		link: 'https://doi.org/10.1201/9781003581581-3',
 		abstract: '',

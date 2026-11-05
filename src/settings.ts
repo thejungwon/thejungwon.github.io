@@ -1,6 +1,6 @@
 export const profile = {
 	fullName: 'Jungwon Seo',
-	title: 'Ph.D. Candidate in Applied Data Science',
+	title: 'Ph.D. in Applied Data Science',
 	institute: 'University of Stavanger',
 	author_name: 'Jungwon Seo',
 	research_areas: [
